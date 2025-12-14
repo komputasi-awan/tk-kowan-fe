@@ -14,7 +14,7 @@ This is the client-side application built with Next.js (Client Components) desig
 * **Styling:** Tailwind CSS
 * **Authentication:** Firebase Authentication
 * **API Client:** Axios
-* **Backend:** [https://github.com/komputasi-awan/tk-kowan/blob/main/app/routers/cv.py] (FastAPI, Python, Gemini API)
+* **Backend:** [https://github.com/komputasi-awan/tk-kowan] (FastAPI, Python, Gemini API)
 
 ## ⚙️ Setup & Installation
 ### 1. Cloning the Repository
