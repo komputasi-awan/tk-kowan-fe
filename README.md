@@ -1,48 +1,107 @@
-# 🚀 CV Scorer Frontend
-This is the client-side application built with Next.js (Client Components) designed to provide users with an interface to analyze their resume (CV) against job descriptions using AI. This application was built for a Cloud Computing Group Assignment.
+# JobFit AI - Frontend
+Sistem analisis resume berbasis AI yang dibangun dengan Next.js dan terintegrasi dengan backend FastAPI yang menggunakan Google Gemini AI.
 
-## ✨ Key Features
-* **Service Layer Architecture:** Business Logic (Authentication, API Calls) is strictly separated from UI Logic (Components) for improved maintainability and testability.
-* **Secure Authentication:** Utilizes Firebase Authentication (Email/Password & Google OAuth) for robust user session management.
-* **AI-Powered Analysis:** Sends CV PDF files and job descriptions to the dedicated FastAPI backend service for AI matching.
-* **User Experience:** Modern, *responsive*, and engaging user interface built with Tailwind CSS.
-* **Auth Guards:** Implements redirect logic to secure the main application route (`/dashboard`) and prevent authenticated users from accessing public authentication pages (`/login`, `/register`).
+## Link Repository
+- **Frontend:** https://github.com/komputasi-awan/tk-kowan-fe
+- **Backend:** https://github.com/komputasi-awan/tk-kowan
 
-## 🛠️ Tech Stack
-* **Framework:** Next.js (App Router, Client Components)
-* **Language:** TypeScript
-* **Styling:** Tailwind CSS
-* **Authentication:** Firebase Authentication
-* **API Client:** Axios
-* **Backend:** [https://github.com/komputasi-awan/tk-kowan] (FastAPI, Python, Gemini API)
+## Penjelasan Aplikasi
+JobFit AI dapat membantu pencari kerja mengoptimalkan resume mereka dengan menganalisis konten CV terhadap deskripsi pekerjaan menggunakan AI. Sistem ini memberikan skor kecocokan, ringkasan, dan rekomendasi skill pekerja yang masih perlu ditingkatkan.
 
-## ⚙️ Setup & Installation
-### 1. Cloning the Repository
-```bash
-git clone https://github.com/anjanianadya/tk-kowan-fe
+**Fitur Utama:**
+- **Authentication:** Firebase Authentication dengan Email/Password & Google OAuth
+- **CV Upload:** Upload file PDF yang aman ke AWS S3 (Private Bucket)
+- **Secure Access:** Menggunakan Presigned URLs untuk akses file sementara
+- **PDF Parsing:** Ekstraksi teks otomatis dari PDF (via AWS Lambda)
+- **AI Analysis:** Integrasi dengan Google Gemini untuk mencocokkan CV vs Job Description
+- **Analysis Result:** Menampilkan skor kecocokan, ringkasan CV, dan skill yang kurang
 
+**Alur Pengguna:**
+```
+Login/Register → Dashboard → Upload CV + Job Description → Analisis AI → Lihat Hasil
 ```
 
-### 2. Installing Dependencies
+## Tech Stack
+
+| Teknologi | Fungsi |
+|-----------|--------|
+| Next.js | React framework dengan App Router |
+| TypeScript | Pengembangan dengan type-safe |
+| Tailwind CSS | Styling UI yang responsif |
+| Firebase Auth | Autentikasi pengguna |
+| Axios | Komunikasi dengan backend API |
+
+**Integrasi Backend:** FastAPI (AWS EC2 + Docker), Amazon S3 (penyimpanan file), Google Gemini AI (analisis CV), AWS Lambda (parsing PDF)
+
+## Setup Development
+
+### Prerequisites
+- Node.js 18.x atau lebih tinggi
+- Kredensial Firebase project
+- Akses ke backend API
+
+### Langkah Instalasi
+
 ```bash
-npm install 
-# or yarn install / pnpm install
+# 1. Clone repository
+git clone https://github.com/komputasi-awan/tk-kowan-fe
+cd tk-kowan-fe
 
-```
+# 2. Install dependencies
+npm install
 
-### 3. Environment Variables Configuration
-You must create a `.env.local` file in the project root folder and populate it with the necessary configuration details for Firebase and the Backend API URL. Contact us for the file content.
+# 3. Buat file `.env.local` dan salin isi berkas `.env.example` ke file tersebut.
 
-### 4. Running the Development ServerExecute the following command to start the server:
-
-```bash
+# 4. Jalankan development server
 npm run dev
-
 ```
 
-Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) in your browser to view the application.
+**Catatan:** 
+- Semua variabel `NEXT_PUBLIC_*` adalah **client-side** dan akan ter-expose di browser
+- Firebase API Key bukan secret, keamanan dijaga oleh Firebase Security Rules
 
-## 📚 Learn MoreTo learn more about Next.js and the technologies used:
+## Panduan Deployment (Vercel)
 
-* [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API.
-* [Tailwind CSS Docs](https://tailwindcss.com/docs) - Reference for utility-first CSS.
+### Langkah 1: Push Kode ke GitHub
+```bash
+git add .
+git commit -m "Siap untuk deployment"
+git push origin main
+```
+
+### Langkah 2: Import ke Vercel
+1. Login ke [Vercel Dashboard](https://vercel.com/dashboard)
+2. Klik **"Add New Project"**
+3. Pilih **"Import Git Repository"**
+4. Pilih repository: `komputasi-awan/tk-kowan-fe`
+5. Klik **"Import"**
+
+### Langkah 3: Konfigurasi Build Settings
+- **Framework:** Next.js
+- **Root Directory:** `./`
+- **Build Command:** `npm run build`
+- **Output Directory:** `.next`
+
+### Langkah 4: Tambahkan Environment Variables
+Di pengaturan project Vercel, salin semua variabel dari `.env.local` (atau lihat berkas .env.example).
+
+### Langkah 5: Deploy
+1. Klik **"Deploy"**
+2. Tunggu 2-5 menit hingga build selesai
+3. Akses aplikasi di: `https://your-app.vercel.app`
+
+## Struktur Project
+```
+src/
+├── app/              # Halaman Next.js (App Router)
+├── components/       # Komponen UI
+├── services/         # Logika API & auth
+└── lib/              # Utilities
+```
+
+## Anggota Tim
+1. Arya Kusuma Daniswara - 2206083546
+2. Sabrina Atha Shania - 2206829591
+3. Wahyu Hidayat - 2206081894
+4. Ratu Nadya Anjania - 2206029752
+5. Muhammad Pendar Bintang Kasdiono - 2206083174
