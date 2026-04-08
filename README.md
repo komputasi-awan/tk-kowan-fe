@@ -1,107 +1,118 @@
 # JobFit AI - Frontend
-Sistem analisis resume berbasis AI yang dibangun dengan Next.js dan terintegrasi dengan backend FastAPI yang menggunakan Google Gemini AI.
+An AI-powered resume analysis system built with Next.js, integrated with a FastAPI backend and Google Gemini AI.
 
-## Link Repository
+**Website:** [https://tk-kowan-fe.vercel.app/](https://tk-kowan-fe.vercel.app/)
+
+## Repository Links
 - **Frontend:** https://github.com/komputasi-awan/tk-kowan-fe
 - **Backend:** https://github.com/komputasi-awan/tk-kowan
 
-## Penjelasan Aplikasi
-JobFit AI dapat membantu pencari kerja mengoptimalkan resume mereka dengan menganalisis konten CV terhadap deskripsi pekerjaan menggunakan AI. Sistem ini memberikan skor kecocokan, ringkasan, dan rekomendasi skill pekerja yang masih perlu ditingkatkan.
+## About the Project
+JobFit AI helps job seekers optimize their resumes by analyzing their CV content against specific job descriptions using AI. The system provides a match score, a CV summary, and recommendations for skills that need improvement.
 
-**Fitur Utama:**
-- **Authentication:** Firebase Authentication dengan Email/Password & Google OAuth
-- **CV Upload:** Upload file PDF yang aman ke AWS S3 (Private Bucket)
-- **Secure Access:** Menggunakan Presigned URLs untuk akses file sementara
-- **PDF Parsing:** Ekstraksi teks otomatis dari PDF (via AWS Lambda)
-- **AI Analysis:** Integrasi dengan Google Gemini untuk mencocokkan CV vs Job Description
-- **Analysis Result:** Menampilkan skor kecocokan, ringkasan CV, dan skill yang kurang
+**Key Features:**
+- **Authentication:** Firebase Authentication (Email/Password & Google OAuth).
+- **CV Upload:** Secure PDF file uploads to AWS S3 (Private Bucket).
+- **Secure Access:** Utilizes Presigned URLs for temporary file access.
+- **PDF Parsing:** Automated text extraction from PDFs via AWS Lambda.
+- **AI Analysis:** Google Gemini integration to match CVs against Job Descriptions.
+- **Analysis Results:** Displays match scores, CV summaries, and skill gap insights.
 
-**Alur Pengguna:**
-```
-Login/Register → Dashboard → Upload CV + Job Description → Analisis AI → Lihat Hasil
-```
+## Application Preview & Demo
+
+**Interactive Flow:**
+![JobFit AI Flow](assets/5_flow.gif)
+
+**Interface Screenshots:**
+
+| Home Page | Registration |
+| :---: | :---: |
+| ![Homepage](assets/1_homepage.png) | ![Register](assets/2_register.png) |
+
+| Submit CV Form | Analysis Results |
+| :---: | :---: |
+| ![Submit CV](assets/3_submit_cv.png) | ![Submitted CV](assets/4_submitted%20cv.png) |
 
 ## Tech Stack
 
-| Teknologi | Fungsi |
+| Technology | Purpose |
 |-----------|--------|
-| Next.js | React framework dengan App Router |
-| TypeScript | Pengembangan dengan type-safe |
-| Tailwind CSS | Styling UI yang responsif |
-| Firebase Auth | Autentikasi pengguna |
-| Axios | Komunikasi dengan backend API |
+| Next.js | React framework with App Router |
+| TypeScript | Type-safe development |
+| Tailwind CSS | Responsive UI styling |
+| Firebase Auth | User authentication |
+| Axios | Backend API communication |
 
-**Integrasi Backend:** FastAPI (AWS EC2 + Docker), Amazon S3 (penyimpanan file), Google Gemini AI (analisis CV), AWS Lambda (parsing PDF)
+**Backend Integration:** FastAPI (AWS EC2 + Docker), Amazon S3 (file storage), Google Gemini AI (CV analysis), AWS Lambda (PDF parsing).
 
-## Setup Development
+## Development Setup
 
 ### Prerequisites
-- Node.js 18.x atau lebih tinggi
-- Kredensial Firebase project
-- Akses ke backend API
+- Node.js 18.x or higher
+- Firebase project credentials
+- Access to the backend API
 
-### Langkah Instalasi
+### Installation Steps
 
 ```bash
-# 1. Clone repository
-git clone https://github.com/komputasi-awan/tk-kowan-fe
+# 1. Clone the repository
+git clone [https://github.com/komputasi-awan/tk-kowan-fe](https://github.com/komputasi-awan/tk-kowan-fe)
 cd tk-kowan-fe
 
 # 2. Install dependencies
 npm install
 
-# 3. Buat file `.env.local` dan salin isi berkas `.env.example` ke file tersebut.
+# 3. Create a `.env.local` file and copy the contents from `.env.example`.
 
-# 4. Jalankan development server
+# 4. Run the development server
 npm run dev
 ```
 
-**Catatan:** 
-- Semua variabel `NEXT_PUBLIC_*` adalah **client-side** dan akan ter-expose di browser
-- Firebase API Key bukan secret, keamanan dijaga oleh Firebase Security Rules
+Note: 
+- All NEXT_PUBLIC_* variables are client-side and will be exposed in the browser.
+- The Firebase API Key is not a secret; security is enforced via Firebase Security Rules.
 
-## Panduan Deployment (Vercel)
-
-### Langkah 1: Push Kode ke GitHub
+Deployment Guide (Vercel)
+### Step 1: Push Code to GitHub
 ```bash
 git add .
 git commit -m "Siap untuk deployment"
 git push origin main
 ```
 
-### Langkah 2: Import ke Vercel
-1. Login ke [Vercel Dashboard](https://vercel.com/dashboard)
-2. Klik **"Add New Project"**
-3. Pilih **"Import Git Repository"**
-4. Pilih repository: `komputasi-awan/tk-kowan-fe`
-5. Klik **"Import"**
+### Step 2: Import to Vercel
+1. Log in to the Vercel Dashboard.
+2. Click "Add New Project".
+3. Select "Import Git Repository".
+4. Choose the repository: komputasi-awan/tk-kowan-fe.
+5. Click "Import".
 
-### Langkah 3: Konfigurasi Build Settings
+### Step 3: Configure Build Settings
 - **Framework:** Next.js
 - **Root Directory:** `./`
 - **Build Command:** `npm run build`
 - **Output Directory:** `.next`
 
-### Langkah 4: Tambahkan Environment Variables
-Di pengaturan project Vercel, salin semua variabel dari `.env.local` (atau lihat berkas .env.example).
+### Step 4: Add Environment Variables
+In the Vercel project settings, copy all variables from .env.local (or refer to .env.example).
 
-### Langkah 5: Deploy
-1. Klik **"Deploy"**
-2. Tunggu 2-5 menit hingga build selesai
-3. Akses aplikasi di: `https://your-app.vercel.app`
+### Step 5: Deploy
+1. Click "Deploy".
+2. Wait 2-5 minutes for the build to complete.
+3. Access the application at: https://tk-kowan-fe.vercel.app/
 
-## Struktur Project
+Project Structure
 ```
 src/
-├── app/              # Halaman Next.js (App Router)
-├── components/       # Komponen UI
-├── services/         # Logika API & auth
-└── lib/              # Utilities
+├── app/              # Next.js Pages (App Router)
+├── components/       # Reusable UI Components
+├── services/         # API & Authentication Logic
+└── lib/              # Utility Functions
 ```
 
-## Anggota Tim
-1. Arya Kusuma Daniswara - 2206083546
-2. Sabrina Atha Shania - 2206829591
-3. Wahyu Hidayat - 2206081894
-4. Ratu Nadya Anjania - 2206029752
-5. Muhammad Pendar Bintang Kasdiono - 2206083174
+Team Members
+- Arya Kusuma Daniswara - 2206083546
+- Sabrina Atha Shania - 2206829591
+- Wahyu Hidayat - 2206081894
+- Ratu Nadya Anjania - 2206029752
+- Muhammad Pendar Bintang Kasdiono - 2206083174
